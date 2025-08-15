@@ -9,11 +9,7 @@
       padding: 0;
       font-family: 'Georgia', serif;
       background-color: transparent;
-      background-image: url('images/background.png');
       background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
-      background-size: cover;
       color: white;
       min-height: 100vh;
       transition: background-color 1.5s ease, color 1s ease;
@@ -25,6 +21,17 @@
       color: black;
     }
 
+    body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('images/background.png') no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
 
     .container {
       display: flex;
@@ -237,7 +244,7 @@
 
     .schedule-title {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #333;
     margin-bottom: 3rem;
     position: relative;
@@ -269,13 +276,13 @@
 
     .schedule-details h3 {
         margin: 0;
-        font-size: 1.3rem;
+        font-size: 2rem;
         color: #222;
     }
 
     .schedule-time {
         font-weight: bold;
-        font-size: 1.1rem;
+        font-size: 2rem;
         margin: 0.4rem 0;
         color: #d88a3d;
     }
@@ -283,7 +290,7 @@
     .schedule-details p {
         margin: 0.2rem 0;
         color: #333;
-        font-size: 1.2rem;
+        font-size: 2rem;
         position: relative;
     }
 
@@ -294,7 +301,7 @@
   border-radius: 999px; /* օվալաձև */
   background-color: white;
   color: black;
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
   transition: all 0.3s ease;
