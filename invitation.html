@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <title>Դավիթ և Գայանե - Հարսանեկան Հրավիրատոմս</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-color: transparent;
+      background-image: url('images/background.png');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      color: white;
+      min-height: 100vh;
+      transition: background-color 1.5s ease, color 1s ease;
+    }
+
+    body.white-bg {
+      background-image: none; /* հանում ենք նկարը */
+      background-color: white;
+      color: black;
+    }
+
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      padding-top: 30vh; /* այս տողը ավելացրու՝ icon-ները ցած դնելու համար */
+    }
+
+    .date-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      left: -1%;
+    }
+
+    .date-item {
+      opacity: 0;
+    }
+
+    .date-item.visible {
+      animation: slide-in 3s ease forwards;
+    }
+
+    .date-item#month.visible {
+      animation: slide-in-month 3s ease forwards;
+    }
+
+    .date-item img {
+      width: 200px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+    }
+
+    .wedding-date-item {
+      text-align: center;
+    }
+    .wedding-date-item img {
+      width: 100px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+    }
+
+    @keyframes slide-in {
+        0% {
+            opacity: 0;
+            transform: translateX(-250px);
+        }
+        60% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-30px);
+        }
+    }
+
+    @keyframes slide-in-month {
+        0% {
+            opacity: 0;
+            transform: translateX(-250px);
+        }
+        60% {
+            opacity: 1;
+            transform: translateX(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .main-photo {
+      opacity: 0;
+      transform: translateX(150px);
+      transition: all 2s ease;
+    }
+
+    .main-photo.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .main-photo img {
+      width: 500px;
+      /* height: auto; */
+      border-radius: 1px;
+      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+    }
+
+    .invitation-text {
+      margin-top: 30vh; /* տեղադրում է սքրոլից հետո */
+      text-align: center;
+      font-size: 1.3rem;
+      font-family: 'Georgia', serif;
+      color: white;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+      opacity: 1;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .bold-text {
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .countdown-wrapper {
+      color: black;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .countdown-wrapper h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .countdown-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .time-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      min-width: 70px;
+    }
+
+    .number {
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    }
+
+    .label {
+      font-size: 3rem;
+      margin-top: 0.2rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+    }
+
+    .divider {
+      font-size: 2rem;
+      color: white;
+      padding: 0 0.5rem;
+    }
+
+    .white-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .container,
+    .invitation-text,
+    .wedding-date-item,
+    .countdown-wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    .schedule-section {
+        background-color: #fff;
+        padding: 4rem 2rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: 4rem auto;
+        transition: all 0.6s ease;
+    }
+
+    .schedule-section {
+        background-color: white !important;
+        color: #222 !important;
+        position: relative;
+        z-index: 5;
+    }
+
+    .schedule-section * {
+        color: #222 !important;
+    }
+
+    .schedule-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 3rem;
+    position: relative;
+    }
+
+    .schedule-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #d9a667;
+    margin: 1rem auto 0;
+    border-radius: 2px;
+    }
+
+    .schedule-item {
+        text-align: center;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column; /* փոխում ենք ուղղությունը՝ vertical */
+        align-items: center; /* կենտրոնացնում ենք */
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+        padding: 1rem 0;
+        border-bottom: 1px dashed #ccc;
+        width: 200px;
+        position: relative;
+    }
+
+    .schedule-details h3 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: #222;
+    }
+
+    .schedule-time {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin: 0.4rem 0;
+        color: #d88a3d;
+    }
+
+    .schedule-details p {
+        margin: 0.2rem 0;
+        color: #333;
+        font-size: 1.2rem;
+        position: relative;
+    }
+
+    .schedule-details a {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid #000;
+  border-radius: 999px; /* օվալաձև */
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-details a:hover {
+  background-color: black;
+  color: white;
+  border-color: black;
+  text-decoration: none;
+}
+
+    .center-wrapper {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 4rem 1rem;
+        min-height: 100vh;
+    }
+
+    .schedule-icon[src*="registry.svg"] {
+        width: 140px; /* կամ ուրիշ փոքր չափ */
+        }
+
+
+        .above-countdown-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vw;
+    margin-bottom: 2rem;
+    }
+
+.above-icon {
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+  height: auto;
+}
+
+.large-icon {
+  width: clamp(550px, 20vw, 1000px);
+}
+
+.small-icon {
+  width: clamp(450px, 8vw, 800px);
+}
+
+
+.rsvp-section {
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  font-family: 'Georgia', serif;
+}
+
+.rsvp-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #444;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"] {
+  display: block;
+  margin: 0 auto;
+  background-color: black;
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #444;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="white-overlay" id="whiteOverlay"></div>
+
+  <div class="container">
+    <div class="date-container">
+      <div class="date-item" id="day">
+        <img src="icons/day.svg">
+      </div>
+      <div class="date-item" id="month">
+        <img src="icons/month.svg">
+      </div>
+      <div class="date-item" id="year">
+        <img src="icons/year.svg">
+      </div>
+    </div>
+
+    <div class="main-photo" id="main-photo">
+      <img src="icons/and.svg" alt="Դավիթ և Գայանե">
+    </div>
+  </div>
+
+  <div class="invitation-text" id="ivitation">
+    <p><h2>Սիրելի՜ ընկերներ և բարեկամներ,</h2></p>
+    <p><h2>Ուրախությամբ և անսահման սիրով հրավիրում ենք Ձեզ ներկա գտնվելու <br>
+        մեր կյանքի նշանակալից օրվան՝ մեր հարսանեկան միջոցառմանը։</h2>
+        <br><br></p>
+  </div>
+  
+  <div class="wedding-date-item">
+    <img src="icons/day-month-year.png">
+  </div>
+
+  <div class="above-countdown-images">
+    <img src="images/image1.png" class="above-icon large-icon" alt="Մեծ Նկար">
+    <img src="images/image2.png" class="above-icon small-icon" alt="Փոքր Նկար">
+  </div>
+  <div class="countdown-wrapper">
+    <h2>ՄՆԱՑ</h2>
+    <div class="countdown-box">
+      <div class="time-unit">
+        <div class="number" id="days">00</div>
+        <div class="label">ՕՐ</div>
+      </div>
+      <div class="divider">|</div>
+      <div class="time-unit">
+        <div class="number" id="hours">00</div>
+        <div class="label">ԺԱՄ</div>
+      </div>
+      <div class="divider">|</div>
+      <div class="time-unit">
+        <div class="number" id="minutes">00</div>
+        <div class="label">ՐՈՊԵ</div>
+      </div>
+      <div class="divider">|</div>
+      <div class="time-unit">
+        <div class="number" id="seconds">00</div>
+        <div class="label">ՎԱՅՐԿՅԱՆ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="center-wrapper">
+        <h2 class="schedule-title">ՕՐՎԱ ԾՐԱԳԻՐԸ</h2>
+        <div class="schedule-item">
+        <img src="icons/church.svg" class="schedule-icon">
+        <div class="schedule-details">
+            <h3>ՊՍԱԿԱԴՐՈՒԹՅՈՒՆ</h3>
+            <p class="schedule-time">14:00</p>
+            <p>Սուրբ Երրորդություն Եկեղեցի</p>
+            <a href="https://maps.app.goo.gl/MNtjT5J2cgBEqZ817" target="_blank">Ինչպես հասնել</a>
+        </div>
+        </div>
+    
+        <div class="schedule-item">
+        <img src="icons/registry.svg" class="schedule-icon">
+        <div class="schedule-details">
+            <h3>ԱՄՈՒՍՆՈՒԹՅԱՆ ԳՐԱՆՑՈՒՄ</h3>
+            <p class="schedule-time">16:30</p>
+            <p>Լիաննա Գարդեն Հոլ</p>
+            <a href="https://maps.app.goo.gl/u2TnyagPtAxNkKpV7" target="_blank">Ինչպես հասնել</a>
+        </div>
+        </div>
+    
+        <div class="schedule-item">
+        <img src="icons/cups.svg" class="schedule-icon">    
+        <div class="schedule-details">
+            <h3>ՀԱՐՍԱՆԵԿԱՆ ՀԱՆԴԻՍՈՒԹՅՈՒՆ</h3>
+            <p class="schedule-time">17:30</p>
+            <p>Լիաննա Գարդեն Հոլ</p>
+            <a href="https://maps.app.goo.gl/u2TnyagPtAxNkKpV7" target="_blank">Ինչպես հասնել</a>
+        </div>
+        </div>
+  </div>
+
+  <div class="rsvp-section">
+    <h2>Հրավերի Պատասխան</h2>
+    <form id="rsvp-form">
+      <div class="form-group">
+        <label for="side">Ո՞ր կողմն եք ներկայացնում</label>
+        <select id="side" name="side" required>
+          <option value="">Ընտրել...</option>
+          <option value="հարսի">Հարսի կողմ</option>
+          <option value="փեսայի">Փեսայի կողմ</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <div class="radio-group">
+          <label><input type="radio" name="coming" value="Այո" required> Մենք կգանք :)</label>
+          <label><input type="radio" name="coming" value="Ոչ"> Չենք կարող գալ :(</label>
+        </div>
+      </div>
+  
+      <div class="form-group" id="guests-wrapper" style="display: none;">
+        <label for="guests">Հյուրերի թիվ</label>
+        <input type="number" id="guests" name="guests" min="1" max="10">
+      </div>
+  
+      <div class="form-group" id="names-wrapper" style="display: none;">
+        <label>Անուն Ազգանուն(ներ)</label>
+        <div id="guest-names"></div>
+      </div>
+  
+      <div class="form-group" id="non-guest-name-wrapper" style="display: none;">
+        <label for="nonGuestName">Անուն Ազգանուն (ով չի գալիս)</label>
+        <input type="text" id="nonGuestName" name="nonGuestName">
+      </div>
+  
+      <button type="submit">Ուղարկել</button>
+    </form>
+  </div>
+
+  <script>
+    window.onload = () => {
+      setTimeout(() => document.getElementById('day').classList.add('visible'), 500);
+      setTimeout(() => document.getElementById('month').classList.add('visible'), 1200);
+      setTimeout(() => document.getElementById('year').classList.add('visible'), 1900);
+      setTimeout(() => document.getElementById('main-photo').classList.add('visible'), 2500);
+    };
+  </script>
+
+  <script>
+    const overlay = document.getElementById("whiteOverlay");
+    const trigger = document.querySelector(".invitation-text");
+
+    window.addEventListener("scroll", () => {
+      const rect = trigger.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      let progress = 1 - rect.top / windowHeight;
+      progress = Math.min(Math.max(progress, 0), 1); // սահուն 0–1 միջակայքում
+      overlay.style.opacity = progress;
+      overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+    });
+  </script>
+
+  
+
+  <script>
+    const weddingDate = new Date("2025-09-20");
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.querySelector(".countdown-wrapper").innerHTML = "<h2>ՀԱՐՍԱՆԻՔԸ ՍԿՍՎԵԼ Է 🎉</h2>";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = days.toString().padStart(2, '0');
+      hoursEl.textContent = hours.toString().padStart(2, '0');
+      minutesEl.textContent = minutes.toString().padStart(2, '0');
+      secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+  emailjs.init("Q6RTQIXNQbZev75yx");
+
+  const guestsInput = document.getElementById("guests");
+  const guestNamesContainer = document.getElementById("guest-names");
+  const guestsWrapper = document.getElementById("guests-wrapper");
+  const namesWrapper = document.getElementById("names-wrapper");
+  const nonGuestNameWrapper = document.getElementById("non-guest-name-wrapper");
+
+  const radioButtons = document.querySelectorAll('input[name="coming"]');
+  radioButtons.forEach(rb => {
+    rb.addEventListener("change", () => {
+      const selected = document.querySelector('input[name="coming"]:checked')?.value;
+
+      if (selected === "Այո") {
+        guestsWrapper.style.display = "block";
+        namesWrapper.style.display = "block";
+        nonGuestNameWrapper.style.display = "none";
+      } else {
+        guestsWrapper.style.display = "none";
+        namesWrapper.style.display = "none";
+        guestNamesContainer.innerHTML = "";
+        nonGuestNameWrapper.style.display = "block";
+      }
+    });
+  });
+
+  guestsInput.addEventListener("input", () => {
+    const count = parseInt(guestsInput.value) || 0;
+    guestNamesContainer.innerHTML = "";
+
+    for (let i = 1; i <= count; i++) {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = `guest_name_${i}`;
+      input.placeholder = `Հյուր ${i} - Անուն Ազգանուն`;
+      input.required = true;
+      input.style.marginBottom = "0.5rem";
+      guestNamesContainer.appendChild(input);
+    }
+  });
+
+  document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const side = document.getElementById("side").value;
+    const coming = document.querySelector('input[name="coming"]:checked')?.value;
+    const guests = document.getElementById("guests").value;
+    const nonGuestName = document.getElementById("nonGuestName").value;
+
+    let guestNames = [];
+    if (coming === "Այո") {
+      const inputs = guestNamesContainer.querySelectorAll("input");
+      inputs.forEach(input => {
+        guestNames.push(input.value);
+      });
+    }
+
+    const formData = {
+      side: side,
+      coming: coming,
+      guests: coming === "Այո" ? guests : "Չկա",
+      name: coming === "Այո" ? guestNames.join(", ") : nonGuestName
+    };
+
+    emailjs.send('service_nrgvyqh', 'template_sfjovgk', formData)
+      .then(function(response) {
+        alert("Շնորհակալություն, պատասխանը ուղարկվեց 💌");
+        e.target.reset();
+        guestsWrapper.style.display = "none";
+        namesWrapper.style.display = "none";
+        nonGuestNameWrapper.style.display = "none";
+        guestNamesContainer.innerHTML = "";
+      }, function(error) {
+        alert("Խնդիր առաջացավ․ խնդրում ենք փորձել ավելի ուշ։");
+        console.error("FAILED", error);
+      });
+  });
+</script>
+</body>
+</html>
