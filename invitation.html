@@ -1,689 +1,688 @@
 <!DOCTYPE html>
 <html lang="hy">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Դավիթ և Գայանե - Հարսանեկան Հրավիրատոմս</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Georgia', serif;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      color: white;
-      min-height: 100vh;
-      transition: background-color 1.5s ease, color 1s ease;
-    }
-
-    body.white-bg {
-      background-image: none; /* հանում ենք նկարը */
-      background-color: white;
-      color: black;
-    }
-
-    body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('images/background.png') no-repeat center center;
-  background-size: cover;
-  z-index: -1;
-}
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      padding-top: 30vh; /* այս տողը ավելացրու՝ icon-ները ցած դնելու համար */
-    }
-
-    .date-container {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      position: relative;
-      left: -1%;
-    }
-
-    .date-item {
-      opacity: 0;
-    }
-
-    .date-item.visible {
-      animation: slide-in 3s ease forwards;
-    }
-
-    .date-item#month.visible {
-      animation: slide-in-month 3s ease forwards;
-    }
-
-    .date-item img {
-      width: 200px;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
-    }
-
-    .wedding-date-item {
-      text-align: center;
-    }
-    .wedding-date-item img {
-      width: 100px;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
-    }
-
-    @keyframes slide-in {
-        0% {
-            opacity: 0;
-            transform: translateX(-250px);
+    <meta charset="UTF-8">
+    <title>Դավիթ և Գայանե - Հարսանեկան Հրավիրատոմս</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            color: white;
+            min-height: 100vh;
+            transition: background-color 1.5s ease, color 1s ease;
         }
-        60% {
+
+        body.white-bg {
+            background-image: none;
+            background-color: white;
+            color: black;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/background.png') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            padding-top: 30vh;
+        }
+
+        .date-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: relative;
+            left: -1%;
+        }
+
+        .date-item {
+            opacity: 0;
+        }
+
+        .date-item.visible {
+            animation: slide-in 3s ease forwards;
+        }
+
+        .date-item#month.visible {
+            animation: slide-in-month 3s ease forwards;
+        }
+
+        .date-item img {
+            width: 200px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+        }
+
+        .wedding-date-item {
+            text-align: center;
+        }
+
+        .wedding-date-item img {
+            width: 100px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+        }
+
+        @keyframes slide-in {
+            0% {
+                opacity: 0;
+                transform: translateX(-250px);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(-30px);
+            }
+        }
+
+        @keyframes slide-in-month {
+            0% {
+                opacity: 0;
+                transform: translateX(-250px);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateX(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .main-photo {
+            opacity: 0;
+            transform: translateX(150px);
+            transition: all 2s ease;
+        }
+
+        .main-photo.visible {
             opacity: 1;
             transform: translateX(0);
         }
-        100% {
-            opacity: 1;
-            transform: translateX(-30px);
-        }
-    }
 
-    @keyframes slide-in-month {
-        0% {
+        .main-photo img {
+            width: 500px;
+            border-radius: 1px;
+            filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
+        }
+
+        .invitation-text {
+            margin-top: 30vh;
+            text-align: center;
+            font-size: 1.3rem;
+            font-family: 'Georgia', serif;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            opacity: 1;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .countdown-wrapper {
+            color: black;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .countdown-wrapper h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            min-width: 70px;
+        }
+
+        .number {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .label {
+            font-size: 3rem;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .divider {
+            font-size: 2rem;
+            color: white;
+            padding: 0 0.5rem;
+        }
+
+        .white-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            pointer-events: none;
+            z-index: 0;
             opacity: 0;
-            transform: translateX(-250px);
+            transition: opacity 0.5s ease;
         }
-        60% {
-            opacity: 1;
-            transform: translateX(30px);
+
+        .container,
+        .invitation-text,
+        .wedding-date-item,
+        .countdown-wrapper {
+            position: relative;
+            z-index: 1;
         }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
+
+        .schedule-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 3rem;
+            position: relative;
         }
-    }
 
-    .main-photo {
-      opacity: 0;
-      transform: translateX(150px);
-      transition: all 2s ease;
-    }
+        .schedule-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #d9a667;
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
 
-    .main-photo.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
+        .schedule-item {
+            text-align: center;
+            align-items: flex-start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            padding: 1rem 0;
+            border-bottom: 1px dashed #ccc;
+            width: 200px;
+            position: relative;
+        }
 
-    .main-photo img {
-      width: 500px;
-      /* height: auto; */
-      border-radius: 1px;
-      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
-    }
+        .schedule-details h3 {
+            margin: 0;
+            font-size: 2rem;
+            color: #222;
+        }
 
-    .invitation-text {
-      margin-top: 30vh; /* տեղադրում է սքրոլից հետո */
-      text-align: center;
-      font-size: 1.3rem;
-      font-family: 'Georgia', serif;
-      color: white;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 1);
-      opacity: 1;
-      transform: translateY(50px);
-      transition: all 1s ease;
-    }
+        .schedule-time {
+            font-weight: bold;
+            font-size: 2rem;
+            margin: 0.4rem 0;
+            color: #d88a3d;
+        }
 
-    @keyframes fadeInText {
-      to {
-        opacity: 1;
-      }
-    }
+        .schedule-details p {
+            margin: 0.2rem 0;
+            color: #333;
+            font-size: 2rem;
+            position: relative;
+        }
 
-    .bold-text {
-      font-weight: bold;
-      font-size: 1.8rem;
-      margin-top: 1.5rem;
-    }
+        .schedule-details a {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border: 2px solid #000;
+            border-radius: 999px;
+            background-color: white;
+            color: black;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    .countdown-wrapper {
-      color: black;
-      text-align: center;
-      margin-top: 3rem;
-    }
+        .schedule-details a:hover {
+            background-color: black;
+            color: white;
+            border-color: black;
+            text-decoration: none;
+        }
 
-    .countdown-wrapper h2 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: white;
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-    }
+        .center-wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 4rem 1rem;
+        }
 
-    .countdown-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .time-unit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: white;
-      min-width: 70px;
-    }
-
-    .number {
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
-    }
-
-    .label {
-      font-size: 3rem;
-      margin-top: 0.2rem;
-      letter-spacing: 0.5px;
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-    }
-
-    .divider {
-      font-size: 2rem;
-      color: white;
-      padding: 0 0.5rem;
-    }
-
-    .white-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .container,
-    .invitation-text,
-    .wedding-date-item,
-    .countdown-wrapper {
-      position: relative;
-      z-index: 1;
-    }
-
-    .schedule-section {
-        background-color: #fff;
-        padding: 4rem 2rem;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        max-width: 900px;
-        margin: 4rem auto;
-        transition: all 0.6s ease;
-    }
-
-    .schedule-section {
-        background-color: white !important;
-        color: #222 !important;
-        position: relative;
-        z-index: 5;
-    }
-
-    .schedule-section * {
-        color: #222 !important;
-    }
-
-    .schedule-title {
-    text-align: center;
-    font-size: 3rem;
-    color: #333;
-    margin-bottom: 3rem;
-    position: relative;
-    }
-
-    .schedule-title::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background-color: #d9a667;
-    margin: 1rem auto 0;
-    border-radius: 2px;
-    }
-
-    .schedule-item {
-        text-align: center;
-        align-items: flex-start;
-        display: flex;
-        flex-direction: column; /* փոխում ենք ուղղությունը՝ vertical */
-        align-items: center; /* կենտրոնացնում ենք */
-        gap: 1rem;
-        margin-bottom: 2.5rem;
-        padding: 1rem 0;
-        border-bottom: 1px dashed #ccc;
-        width: 200px;
-        position: relative;
-    }
-
-    .schedule-details h3 {
-        margin: 0;
-        font-size: 2rem;
-        color: #222;
-    }
-
-    .schedule-time {
-        font-weight: bold;
-        font-size: 2rem;
-        margin: 0.4rem 0;
-        color: #d88a3d;
-    }
-
-    .schedule-details p {
-        margin: 0.2rem 0;
-        color: #333;
-        font-size: 2rem;
-        position: relative;
-    }
-
-    .schedule-details a {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  border: 2px solid #000;
-  border-radius: 999px; /* օվալաձև */
-  background-color: white;
-  color: black;
-  font-size: 2rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.schedule-details a:hover {
-  background-color: black;
-  color: white;
-  border-color: black;
-  text-decoration: none;
-}
-
-    .center-wrapper {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 4rem 1rem;
-    }
-
-    .schedule-icon[src*="registry.svg"] {
-        width: 140px; /* կամ ուրիշ փոքր չափ */
+        .schedule-icon[src*="registry.svg"] {
+            width: 140px;
         }
 
 
-        .above-countdown-images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3vw;
-    margin-bottom: 2rem;
-    }
+        .rsvp-section {
+            background: #ffffff; /* անթափանց սպիտակ */
+            color: #222;
+            max-width: 650px;
+            margin: 5rem auto;
+            padding: 2.5rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* ավելի ուժեղ ստվեր */
+            border: 2px solid #eee; 
+            backdrop-filter: blur(8px);
+        }
 
-.above-icon {
-  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
-  height: auto;
-}
+        .rsvp-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.4rem;
+            color: #444;
+        }
 
-.large-icon {
-  width: clamp(550px, 20vw, 1000px);
-}
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
 
-.small-icon {
-  width: clamp(450px, 8vw, 800px);
-}
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: bold;
+            font-size: 2rem;
+            color: #111;
+        }
 
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #bbb;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background-color: #fdfdfd;
+        }
 
-.rsvp-section {
-  background: rgba(255, 255, 255, 0.95);
-  color: #222;
-  max-width: 600px;
-  margin: 5rem auto;
-  padding: 2rem 2.5rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  font-family: 'Georgia', serif;
-}
+        input:focus,
+        select:focus {
+            border-color: #d9a667;
+            outline: none;
+        }
 
-.rsvp-section h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  color: #444;
-}
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-.form-group {
-  margin-bottom: 1.5rem;
-}
+        .radio-group label {
+            font-weight: normal;
+        }
 
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
+        button[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            background-color: black;
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-input[type="text"],
-input[type="number"],
-select {
-  width: 100%;
-  padding: 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
+        button[type="submit"]:hover {
+            background-color: #444;
+        }
 
-.radio-group {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-}
+        #guest-names input {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-button[type="submit"] {
-  display: block;
-  margin: 0 auto;
-  background-color: black;
-  color: white;
-  font-size: 1.1rem;
-  padding: 0.7rem 2rem;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #444;
-}
-
-  </style>
+        .notice-section {
+            background-color: #fff;;
+            color: #333;
+            font-family: 'Georgia', serif;
+            max-width: 600px;
+            margin: 4rem auto 2rem auto;
+            padding: 1.8rem 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
+
 <body>
+    <div class="white-overlay" id="whiteOverlay"></div>
 
-  <div class="white-overlay" id="whiteOverlay"></div>
+    <div class="container">
+        <div class="date-container">
+            <div class="date-item" id="day">
+                <img src="icons/day.svg">
+            </div>
+            <div class="date-item" id="month">
+                <img src="icons/month.svg">
+            </div>
+            <div class="date-item" id="year">
+                <img src="icons/year.svg">
+            </div>
+        </div>
 
-  <div class="container">
-    <div class="date-container">
-      <div class="date-item" id="day">
-        <img src="icons/day.svg">
-      </div>
-      <div class="date-item" id="month">
-        <img src="icons/month.svg">
-      </div>
-      <div class="date-item" id="year">
-        <img src="icons/year.svg">
-      </div>
+        <div class="main-photo" id="main-photo">
+            <img src="icons/and.svg" alt="Դավիթ և Գայանե">
+        </div>
     </div>
 
-    <div class="main-photo" id="main-photo">
-      <img src="icons/and.svg" alt="Դավիթ և Գայանե">
-    </div>
-  </div>
-
-  <div class="invitation-text" id="ivitation">
-    <p><h2>Սիրելի՜ ընկերներ և բարեկամներ,</h2></p>
-    <p><h2>Ուրախությամբ և անսահման սիրով հրավիրում ենք Ձեզ ներկա գտնվելու <br>
-        մեր կյանքի նշանակալից օրվան՝ մեր հարսանեկան միջոցառմանը։</h2>
+    <div class="invitation-text" id="ivitation">
+        <p>
+        <h2>Սիրելի՜ ընկերներ և բարեկամներ,</h2>
+        </p>
+        <p>
+        <h2>Ուրախությամբ և անսահման սիրով հրավիրում ենք Ձեզ ներկա գտնվելու <br>
+            մեր կյանքի նշանակալից օրվան՝ մեր հարսանեկան միջոցառմանը։</h2>
         <br><br></p>
-  </div>
-  
-  <div class="wedding-date-item">
-    <img src="icons/day-month-year.png">
-  </div>
-
-  <div class="above-countdown-images">
-    <img src="images/image1.png" class="above-icon large-icon" alt="Մեծ Նկար">
-    <img src="images/image2.png" class="above-icon small-icon" alt="Փոքր Նկար">
-  </div>
-  <div class="countdown-wrapper">
-    <h2>ՄՆԱՑ</h2>
-    <div class="countdown-box">
-      <div class="time-unit">
-        <div class="number" id="days">00</div>
-        <div class="label">ՕՐ</div>
-      </div>
-      <div class="divider">|</div>
-      <div class="time-unit">
-        <div class="number" id="hours">00</div>
-        <div class="label">ԺԱՄ</div>
-      </div>
-      <div class="divider">|</div>
-      <div class="time-unit">
-        <div class="number" id="minutes">00</div>
-        <div class="label">ՐՈՊԵ</div>
-      </div>
-      <div class="divider">|</div>
-      <div class="time-unit">
-        <div class="number" id="seconds">00</div>
-        <div class="label">ՎԱՅՐԿՅԱՆ</div>
-      </div>
     </div>
-  </div>
 
-  <div class="center-wrapper">
+    <div class="wedding-date-item">
+        <img src="icons/day-month-year.png">
+    </div>
+
+    <div class="countdown-wrapper">
+        <h2>ՄՆԱՑ</h2>
+        <div class="countdown-box">
+            <div class="time-unit">
+                <div class="number" id="days">00</div>
+                <div class="label">ՕՐ</div>
+            </div>
+            <div class="divider">|</div>
+            <div class="time-unit">
+                <div class="number" id="hours">00</div>
+                <div class="label">ԺԱՄ</div>
+            </div>
+            <div class="divider">|</div>
+            <div class="time-unit">
+                <div class="number" id="minutes">00</div>
+                <div class="label">ՐՈՊԵ</div>
+            </div>
+            <div class="divider">|</div>
+            <div class="time-unit">
+                <div class="number" id="seconds">00</div>
+                <div class="label">ՎԱՅՐԿՅԱՆ</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="center-wrapper">
         <h2 class="schedule-title">ՕՐՎԱ ԾՐԱԳԻՐԸ</h2>
         <div class="schedule-item">
-        <img src="icons/church.svg" class="schedule-icon">
-        <div class="schedule-details">
-            <h3>ՊՍԱԿԱԴՐՈՒԹՅՈՒՆ</h3>
-            <p class="schedule-time">14:00</p>
-            <p>Սուրբ Երրորդություն Եկեղեցի</p>
-            <a href="https://maps.app.goo.gl/MNtjT5J2cgBEqZ817" target="_blank">Ինչպես հասնել</a>
+            <img src="icons/church.svg" class="schedule-icon">
+            <div class="schedule-details">
+                <h3>ՊՍԱԿԱԴՐՈՒԹՅՈՒՆ</h3>
+                <p class="schedule-time">14:00</p>
+                <p>Սուրբ Երրորդություն Եկեղեցի</p>
+                <a href="https://maps.app.goo.gl/MNtjT5J2cgBEqZ817" target="_blank">Ինչպես հասնել</a>
+            </div>
         </div>
-        </div>
-    
+
         <div class="schedule-item">
-        <img src="icons/registry.svg" class="schedule-icon">
-        <div class="schedule-details">
-            <h3>ԱՄՈՒՍՆՈՒԹՅԱՆ ԳՐԱՆՑՈՒՄ</h3>
-            <p class="schedule-time">16:30</p>
-            <p>Լիաննա Գարդեն Հոլ</p>
-            <a href="https://maps.app.goo.gl/u2TnyagPtAxNkKpV7" target="_blank">Ինչպես հասնել</a>
+            <img src="icons/registry.svg" class="schedule-icon">
+            <div class="schedule-details">
+                <h3>ԱՄՈՒՍՆՈՒԹՅԱՆ ԳՐԱՆՑՈՒՄ</h3>
+                <p class="schedule-time">16:30</p>
+                <p>Լիաննա Գարդեն Հոլ</p>
+                <a href="https://maps.app.goo.gl/u2TnyagPtAxNkKpV7" target="_blank">Ինչպես հասնել</a>
+            </div>
         </div>
-        </div>
-    
+
         <div class="schedule-item">
-        <img src="icons/cups.svg" class="schedule-icon">    
-        <div class="schedule-details">
-            <h3>ՀԱՐՍԱՆԵԿԱՆ ՀԱՆԴԻՍՈՒԹՅՈՒՆ</h3>
-            <p class="schedule-time">17:30</p>
-            <p>Լիաննա Գարդեն Հոլ</p>
-            <a href="https://maps.app.goo.gl/u2TnyagPtAxNkKpV7" target="_blank">Ինչպես հասնել</a>
+            <img src="icons/cups.svg" class="schedule-icon">
+            <div class="schedule-details">
+                <h3>ՀԱՐՍԱՆԵԿԱՆ ՀԱՆԴԻՍՈՒԹՅՈՒՆ</h3>
+                <p class="schedule-time">17:30</p>
+                <p>Լիաննա Գարդեն Հոլ</p>
+                <a href="https://maps.app.goo.gl/u2TnyagPtAxNkKpV7" target="_blank">Ինչպես հասնել</a>
+            </div>
         </div>
-        </div>
-  </div>
+    </div>
 
-  <div class="rsvp-section">
-    <h2>Հրավերի Պատասխան</h2>
-    <form id="rsvp-form">
-      <div class="form-group">
-        <label for="side">Ո՞ր կողմն եք ներկայացնում</label>
-        <select id="side" name="side" required>
-          <option value="">Ընտրել...</option>
-          <option value="հարսի">Հարսի կողմ</option>
-          <option value="փեսայի">Փեսայի կողմ</option>
-        </select>
+    <div class="notice-section">
+        <h2>ՈՒՇԱԴՐՈՒԹՅՈՒՆ</h2>
+        <p>
+          Սիրով տեղեկացնում ենք, որ հարսանեկան երեկոն նախատեսված է միայն մեծահասակների համար։<br>
+          Միջոցառման ընթացքում երեխաների համար նախատեսված անկյուն կամ անիմացիոն ծրագիր չի լինելու, ուստի ներկա կարող են լինել միայն 12 տարեկանից բարձր երեխաները։<br>
+          Շնորհակալ ենք ըմբռնումով մոտենալու համար։
+        </p>
       </div>
-  
-      <div class="form-group">
-        <div class="radio-group">
-          <label><input type="radio" name="coming" value="Այո" required> Մենք կգանք :)</label>
-          <label><input type="radio" name="coming" value="Ոչ"> Չենք կարող գալ :(</label>
-        </div>
+
+    <div class="rsvp-section">
+        <h2>Հրավերի Պատասխան</h2>
+        <form id="rsvp-form">
+          
+          <div class="form-group">
+            <label for="side">Ո՞ր կողմն եք ներկայացնում</label>
+            <select id="side" name="side" required>
+              <option value="">Ընտրել...</option>
+              <option value="հարսի">Հարսի կողմ</option>
+              <option value="փեսայի">Փեսայի կողմ</option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <div class="radio-group">
+              <label><input type="radio" name="coming" value="Այո" required> Մենք կգանք 💖</label>
+              <label><input type="radio" name="coming" value="Ոչ"> Չենք կարող գալ 😞</label>
+            </div>
+          </div>
+      
+          <div class="form-group" id="guests-wrapper" style="display: none;">
+            <label for="guests">Հյուրերի թիվ</label>
+            <input type="number" id="guests" name="guests" min="1" max="10">
+          </div>
+      
+          <div class="form-group" id="names-wrapper" style="display: none;">
+            <label>Անուն Ազգանուն(ներ)</label>
+            <div id="guest-names"></div>
+          </div>
+      
+          <div class="form-group" id="non-guest-name-wrapper" style="display: none;">
+            <label for="nonGuestName">Անուն Ազգանուն (ով չի գալիս)</label>
+            <input type="text" id="nonGuestName" name="nonGuestName">
+          </div>
+      
+          <button type="submit">Ուղարկել</button>
+        </form>
       </div>
-  
-      <div class="form-group" id="guests-wrapper" style="display: none;">
-        <label for="guests">Հյուրերի թիվ</label>
-        <input type="number" id="guests" name="guests" min="1" max="10">
-      </div>
-  
-      <div class="form-group" id="names-wrapper" style="display: none;">
-        <label>Անուն Ազգանուն(ներ)</label>
-        <div id="guest-names"></div>
-      </div>
-  
-      <div class="form-group" id="non-guest-name-wrapper" style="display: none;">
-        <label for="nonGuestName">Անուն Ազգանուն (ով չի գալիս)</label>
-        <input type="text" id="nonGuestName" name="nonGuestName">
-      </div>
-  
-      <button type="submit">Ուղարկել</button>
-    </form>
-  </div>
 
-  <script>
-    window.onload = () => {
-      setTimeout(() => document.getElementById('day').classList.add('visible'), 500);
-      setTimeout(() => document.getElementById('month').classList.add('visible'), 1200);
-      setTimeout(() => document.getElementById('year').classList.add('visible'), 1900);
-      setTimeout(() => document.getElementById('main-photo').classList.add('visible'), 2500);
-    };
-  </script>
+    <script>
+        window.onload = () => {
+            setTimeout(() => document.getElementById('day').classList.add('visible'), 500);
+            setTimeout(() => document.getElementById('month').classList.add('visible'), 1200);
+            setTimeout(() => document.getElementById('year').classList.add('visible'), 1900);
+            setTimeout(() => document.getElementById('main-photo').classList.add('visible'), 2500);
+        };
+    </script>
 
-  <script>
-    const overlay = document.getElementById("whiteOverlay");
-    const trigger = document.querySelector(".invitation-text");
+    <script>
+        const overlay = document.getElementById("whiteOverlay");
+        const trigger = document.querySelector(".invitation-text");
 
-    window.addEventListener("scroll", () => {
-      const rect = trigger.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+        window.addEventListener("scroll", () => {
+            const rect = trigger.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
 
-      let progress = 1 - rect.top / windowHeight;
-      progress = Math.min(Math.max(progress, 0), 1); // սահուն 0–1 միջակայքում
-      overlay.style.opacity = progress;
-      overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-    });
-  </script>
+            let progress = 1 - rect.top / windowHeight;
+            progress = Math.min(Math.max(progress, 0), 1); // սահուն 0–1 միջակայքում
+            overlay.style.opacity = progress;
+            overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+        });
+    </script>
 
-  
 
-  <script>
-    const weddingDate = new Date("2025-09-20");
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = weddingDate - now;
+    <script>
+        const weddingDate = new Date("2025-09-20");
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
 
-      if (diff <= 0) {
-        document.querySelector(".countdown-wrapper").innerHTML = "<h2>ՀԱՐՍԱՆԻՔԸ ՍԿՍՎԵԼ Է 🎉</h2>";
-        clearInterval(timer);
-        return;
-      }
+        function updateCountdown() {
+            const now = new Date();
+            const diff = weddingDate - now;
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+            if (diff <= 0) {
+                document.querySelector(".countdown-wrapper").innerHTML = "<h2>ՀԱՐՍԱՆԻՔԸ ՍԿՍՎԵԼ Է 🎉</h2>";
+                clearInterval(timer);
+                return;
+            }
 
-      daysEl.textContent = days.toString().padStart(2, '0');
-      hoursEl.textContent = hours.toString().padStart(2, '0');
-      minutesEl.textContent = minutes.toString().padStart(2, '0');
-      secondsEl.textContent = seconds.toString().padStart(2, '0');
-    }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
 
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-  </script>
-  
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+            daysEl.textContent = days.toString().padStart(2, '0');
+            hoursEl.textContent = hours.toString().padStart(2, '0');
+            minutesEl.textContent = minutes.toString().padStart(2, '0');
+            secondsEl.textContent = seconds.toString().padStart(2, '0');
+        }
 
-<script>
-  emailjs.init("Q6RTQIXNQbZev75yx");
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
 
-  const guestsInput = document.getElementById("guests");
-  const guestNamesContainer = document.getElementById("guest-names");
-  const guestsWrapper = document.getElementById("guests-wrapper");
-  const namesWrapper = document.getElementById("names-wrapper");
-  const nonGuestNameWrapper = document.getElementById("non-guest-name-wrapper");
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-  const radioButtons = document.querySelectorAll('input[name="coming"]');
-  radioButtons.forEach(rb => {
-    rb.addEventListener("change", () => {
-      const selected = document.querySelector('input[name="coming"]:checked')?.value;
+    <script>
+        emailjs.init("Q6RTQIXNQbZev75yx");
 
-      if (selected === "Այո") {
-        guestsWrapper.style.display = "block";
-        namesWrapper.style.display = "block";
-        nonGuestNameWrapper.style.display = "none";
-      } else {
-        guestsWrapper.style.display = "none";
-        namesWrapper.style.display = "none";
-        guestNamesContainer.innerHTML = "";
-        nonGuestNameWrapper.style.display = "block";
-      }
-    });
-  });
+        const guestsInput = document.getElementById("guests");
+        const guestNamesContainer = document.getElementById("guest-names");
+        const guestsWrapper = document.getElementById("guests-wrapper");
+        const namesWrapper = document.getElementById("names-wrapper");
+        const nonGuestNameWrapper = document.getElementById("non-guest-name-wrapper");
 
-  guestsInput.addEventListener("input", () => {
-    const count = parseInt(guestsInput.value) || 0;
-    guestNamesContainer.innerHTML = "";
+        const radioButtons = document.querySelectorAll('input[name="coming"]');
+        radioButtons.forEach(rb => {
+            rb.addEventListener("change", () => {
+                const selected = document.querySelector('input[name="coming"]:checked')?.value;
 
-    for (let i = 1; i <= count; i++) {
-      const input = document.createElement("input");
-      input.type = "text";
-      input.name = `guest_name_${i}`;
-      input.placeholder = `Հյուր ${i} - Անուն Ազգանուն`;
-      input.required = true;
-      input.style.marginBottom = "0.5rem";
-      guestNamesContainer.appendChild(input);
-    }
-  });
+                if (selected === "Այո") {
+                    guestsWrapper.style.display = "block";
+                    namesWrapper.style.display = "block";
+                    nonGuestNameWrapper.style.display = "none";
+                } else {
+                    guestsWrapper.style.display = "none";
+                    namesWrapper.style.display = "none";
+                    guestNamesContainer.innerHTML = "";
+                    nonGuestNameWrapper.style.display = "block";
+                }
+            });
+        });
 
-  document.getElementById("rsvp-form").addEventListener("submit", function(e) {
-    e.preventDefault();
+        guestsInput.addEventListener("input", () => {
+            const count = parseInt(guestsInput.value) || 0;
+            guestNamesContainer.innerHTML = "";
 
-    const side = document.getElementById("side").value;
-    const coming = document.querySelector('input[name="coming"]:checked')?.value;
-    const guests = document.getElementById("guests").value;
-    const nonGuestName = document.getElementById("nonGuestName").value;
+            for (let i = 1; i <= count; i++) {
+                const input = document.createElement("input");
+                input.type = "text";
+                input.name = `guest_name_${i}`;
+                input.placeholder = `Հյուր ${i} - Անուն Ազգանուն`;
+                input.required = true;
+                input.style.marginBottom = "0.5rem";
+                guestNamesContainer.appendChild(input);
+            }
+        });
 
-    let guestNames = [];
-    if (coming === "Այո") {
-      const inputs = guestNamesContainer.querySelectorAll("input");
-      inputs.forEach(input => {
-        guestNames.push(input.value);
-      });
-    }
+        document.getElementById("rsvp-form").addEventListener("submit", function (e) {
+            e.preventDefault();
 
-    const formData = {
-      side: side,
-      coming: coming,
-      guests: coming === "Այո" ? guests : "Չկա",
-      name: coming === "Այո" ? guestNames.join(", ") : nonGuestName
-    };
+            const side = document.getElementById("side").value;
+            const coming = document.querySelector('input[name="coming"]:checked')?.value;
+            const guests = document.getElementById("guests").value;
+            const nonGuestName = document.getElementById("nonGuestName").value;
 
-    emailjs.send('service_nrgvyqh', 'template_sfjovgk', formData)
-      .then(function(response) {
-        alert("Շնորհակալություն, պատասխանը ուղարկվեց 💌");
-        e.target.reset();
-        guestsWrapper.style.display = "none";
-        namesWrapper.style.display = "none";
-        nonGuestNameWrapper.style.display = "none";
-        guestNamesContainer.innerHTML = "";
-      }, function(error) {
-        alert("Խնդիր առաջացավ․ խնդրում ենք փորձել ավելի ուշ։");
-        console.error("FAILED", error);
-      });
-  });
-</script>
+            let guestNames = [];
+            if (coming === "Այո") {
+                const inputs = guestNamesContainer.querySelectorAll("input");
+                inputs.forEach(input => {
+                    guestNames.push(input.value);
+                });
+            }
+
+            const formData = {
+                side: side,
+                coming: coming,
+                guests: coming === "Այո" ? guests : "Չկա",
+                name: coming === "Այո" ? guestNames.join(", ") : nonGuestName
+            };
+
+            emailjs.send('service_nrgvyqh', 'template_sfjovgk', formData)
+                .then(function (response) {
+                    alert("Շնորհակալություն, պատասխանը ուղարկվեց 💌");
+                    e.target.reset();
+                    guestsWrapper.style.display = "none";
+                    namesWrapper.style.display = "none";
+                    nonGuestNameWrapper.style.display = "none";
+                    guestNamesContainer.innerHTML = "";
+                }, function (error) {
+                    alert("Խնդիր առաջացավ․ խնդրում ենք փորձել ավելի ուշ։");
+                    console.error("FAILED", error);
+                });
+        });
+    </script>
 </body>
+
 </html>
