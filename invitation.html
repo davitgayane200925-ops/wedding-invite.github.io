@@ -75,7 +75,7 @@
         }
 
         .wedding-date-item img {
-            width: 100px;
+            width: 150px;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.6));
@@ -435,7 +435,7 @@
     </div>
 
     <div class="wedding-date-item">
-        <img src="icons/day-month-year.png">
+        <img src="icons/date.svg">
     </div>
 
     <div class="countdown-wrapper">
@@ -605,7 +605,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script>
-        emailjs.init("Q6RTQIXNQbZev75yx");
+        emailjs.init("_d5uzjgtokV3s4LOn");
 
         const guestsInput = document.getElementById("guests");
         const guestNamesContainer = document.getElementById("guest-names");
@@ -669,7 +669,7 @@
                 name: coming === "Այո" ? guestNames.join(", ") : nonGuestName
             };
 
-            emailjs.send('service_nrgvyqh', 'template_sfjovgk', formData)
+            emailjs.send('service_qremhao', 'template_ujaqnoi', formData)
                 .then(function (response) {
                     alert("Շնորհակալություն, պատասխանը ուղարկվեց 💌");
                     e.target.reset();
